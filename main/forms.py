@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
+from .models import DesignRequest, Category
 
 class CustomUserCreationForm(forms.Form):
     username = forms.CharField(
@@ -59,3 +60,26 @@ class RegistrationForm(forms.ModelForm):
         if password1 != password2:
             raise forms.ValidationError("Пароли не совпадают")
         return password2
+
+
+class DesignRequestForm(forms.ModelForm):
+    class Meta:
+        model = DesignRequest
+        fields = ['title', 'description', 'category', 'photo']
+        widgets = {
+            'description': forms.Textarea(attrs={'placeholder': 'Опишите требования к дизайну'}),
+            'photo': forms.ClearableFileInput(attrs={'accept': 'image/*'})
+        }
+
+    def clean_photo(self):
+        photo = self.cleaned_data.get('photo')
+        if photo:
+            # Проверка размера
+            if photo.size > 2 * 1024 * 1024:  # 2MB
+                raise forms.ValidationError("Размер изображения не должен превышать 2MB.")
+            # Проверка на формат
+            valid_extensions = ['jpg', 'jpeg', 'png', 'bmp']
+            ext = photo.name.split('.')[-1].lower()
+            if ext not in valid_extensions:
+                raise forms.ValidationError("Фото должно быть в одном из форматов: jpg, jpeg, png, bmp.")
+        return photo

@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Category  # Импортируем модель Category
 
-# Register your models here.
+# Регистрируем модель Category в админке
+admin.site.register(Category)

@@ -1,9 +1,12 @@
 from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .forms import DesignRequestForm
 
 def home(request):
     # Проверяем, авторизован ли пользователь
@@ -56,3 +59,22 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('home')  # Перенаправляем на главную страницу после выхода
+
+
+@login_required  # Эта декорация гарантирует, что заявку может создать только авторизованный пользователь
+def create_request(request):
+    if request.method == 'POST':
+        form = DesignRequestForm(request.POST, request.FILES)
+        if form.is_valid():
+            design_request = form.save(commit=False)
+            design_request.user = request.user  # Устанавливаем пользователя, подавшего заявку
+            design_request.save()
+            messages.success(request, 'Заявка успешно создана!')
+            return redirect('home')  # Перенаправляем на главную страницу после создания заявки
+        else:
+            # Если форма не валидна, выводим ошибки
+            messages.error(request, 'Пожалуйста, исправьте ошибки в форме.')
+    else:
+        form = DesignRequestForm()
+
+    return render(request, 'main/create_request.html', {'form': form})
