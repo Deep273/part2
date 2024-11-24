@@ -6,6 +6,12 @@
     <div class="hero-section">
         <h2>Добро пожаловать на главную страницу!</h2>
         <p>Здесь будет размещаться основной контент, который может включать различные разделы, карточки и изображения.</p>
-    </div>
 
+        <div class="auth-buttons">
+
+            <a href="{% url 'login' %}" class="btn btn-login">Войти</a>
+            <a href="{% url 'register' %}" class="btn btn-register">Зарегистрироваться</a>
+
+        </div>
+    </div>
 {% endblock %}
