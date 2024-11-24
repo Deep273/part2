@@ -2,9 +2,17 @@ from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
+from django.contrib.auth import logout
 
 def home(request):
-    return render(request, 'main/index.html')
+    # Проверяем, авторизован ли пользователь
+    if request.user.is_authenticated:
+        welcome_message = f"Привет, {request.user.username}!"
+    else:
+        welcome_message = "Привет, гость! Пожалуйста, войдите или зарегистрируйтесь."
+
+    return render(request, 'main/index.html', {'welcome_message': welcome_message})
 
 
 def register(request):
@@ -43,3 +51,8 @@ def login_view(request):
         form = AuthenticationForm()
 
     return render(request, 'registration/login.html', {'form': form})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')  # Перенаправляем на главную страницу после выхода
