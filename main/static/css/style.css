@@ -1,0 +1,102 @@
+/* Сброс стилей */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Общие стили */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;  /* Темный фон */
+    color: #e0e0e0;  /* Светлый текст */
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: #00bcd4;  /* Акцентный цвет для ссылок */
+}
+
+a:hover {
+    color: #80deea;  /* Более светлый акцент при наведении */
+}
+
+/* Шапка */
+header {
+    background-color: #1c1c1c;  /* Еще более темный фон для шапки */
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    color: #00bcd4;
+    margin: 0 15px;
+    font-size: 1.1rem;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Основной контент */
+main {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #2c2c2c;  /* Темный фон для основного контента */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #ffffff;  /* Белый текст для заголовков */
+}
+
+p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #b0bec5;  /* Светло-серый текст для абзацев */
+}
+
+/* Футер */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #1c1c1c;
+    color: #ffffff;
+    margin-top: 40px;
+}
+
+.hero-section {
+    background-color: #1c1c1c;
+    color: #ffffff;
+    padding: 40px 20px;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.hero-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    color: #b0bec5;
+}
