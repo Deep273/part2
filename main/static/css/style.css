@@ -100,3 +100,35 @@ footer {
     font-size: 1.2rem;
     color: #b0bec5;
 }
+
+/* Стили для формы и ошибок */
+.form-group {
+    margin-bottom: 20px;
+}
+
+form input, form button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    background-color: #00bcd4;
+    color: white;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0097a7;
+}
+
+/* Стили для ошибок */
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
