@@ -7,6 +7,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import DesignRequestForm
+from django.shortcuts import render, get_object_or_404
+from .models import DesignRequest
 
 def home(request):
     # Проверяем, авторизован ли пользователь
@@ -78,3 +80,18 @@ def create_request(request):
         form = DesignRequestForm()
 
     return render(request, 'main/create_request.html', {'form': form})
+
+
+# Страница списка всех заявок пользователя
+def my_requests(request):
+    # Получаем все заявки текущего пользователя
+    requests = DesignRequest.objects.filter(user=request.user)
+
+    return render(request, 'main/my_requests.html', {'requests': requests})
+
+# Страница с подробной информацией о заявке
+def request_detail(request, request_id):
+    # Получаем заявку по id
+    design_request = get_object_or_404(DesignRequest, id=request_id)
+
+    return render(request, 'main/request_detail.html', {'request': design_request})

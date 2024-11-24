@@ -1,0 +1,22 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Мои заявки{% endblock %}
+
+{% block content %}
+    <h2>Мои заявки на разработку дизайна интерьера</h2>
+
+    <div class="request-list">
+        {% for request in requests %}
+            <div class="request-item">
+                <h3>{{ request.title }}</h3>
+                <p>{{ request.description|truncatewords:20 }}</p> <!-- Обрезаем описание до 20 слов -->
+                <p><strong>Категория:</strong> {{ request.category.name }}</p>
+
+                <!-- Кнопка для перехода на страницу подробной информации -->
+                <a href="{% url 'request_detail' request.id %}" class="btn">Подробнее</a>
+            </div>
+        {% empty %}
+            <p>У вас нет заявок.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

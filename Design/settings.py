@@ -135,4 +135,12 @@ LOGIN_REDIRECT_URL = '/'
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Использование базы данных для хранения сессий
 SESSION_COOKIE_NAME = 'sessionid'  # Имя cookie для сессии
 
+import os
+
+# Путь к директории, где будут храниться медиа-файлы
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# URL, по которому будут доступны медиа-файлы
+MEDIA_URL = '/media/'
+
 
