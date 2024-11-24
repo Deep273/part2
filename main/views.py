@@ -3,12 +3,12 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import DesignRequestForm
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import DesignRequest
+from django.contrib.auth.decorators import login_required
+
 
 def home(request):
     # Проверяем, авторизован ли пользователь
@@ -95,3 +95,18 @@ def request_detail(request, request_id):
     design_request = get_object_or_404(DesignRequest, id=request_id)
 
     return render(request, 'main/request_detail.html', {'request': design_request})
+
+@login_required
+def delete_request(request, id):
+    # Получаем заявку по ID, проверяя, что она существует
+    request_to_delete = get_object_or_404(DesignRequest, id=id)
+
+    # Проверяем, является ли пользователь владельцем заявки
+    if request_to_delete.user == request.user:
+        # Если пользователь владелец заявки, удаляем ее
+        request_to_delete.delete()
+        # Перенаправляем на страницу со списком заявок
+        return redirect('my_requests')
+    else:
+        # Если пользователь не владелец, показываем ошибку
+        return redirect('home')  # можно перенаправить на главную страницу или показывать сообщение об ошибке

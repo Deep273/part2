@@ -12,5 +12,11 @@
         <img src="{{ request.photo.url }}" alt="{{ request.title }}" class="request-photo">
     {% endif %}
 
+    <!-- Кнопка удаления заявки -->
+    <form action="{% url 'delete_request' request.id %}" method="POST" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Удалить заявку</button>
+    </form>
+
     <a href="{% url 'my_requests' %}" class="btn">Назад к моим заявкам</a>
 {% endblock %}
