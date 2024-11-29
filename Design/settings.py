@@ -144,3 +144,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
+ASGI_APPLICATION = 'Design.asgi.application'

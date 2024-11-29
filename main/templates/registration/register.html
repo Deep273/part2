@@ -10,11 +10,9 @@
         <div class="form-group">
             {{ form.username.label }}:
             {{ form.username }}
-            {% if form.username.errors %}
-                <div class="error">{{ form.username.errors }}</div>
-            {% endif %}
+            <div id="username-error" class="error" style="display:none;">Этот логин уже занят.</div>
         </div>
-        
+
         <div class="form-group">
             {{ form.email.label }}:
             {{ form.email }}
@@ -43,4 +41,29 @@
     </form>
 
     <p>Уже есть аккаунт? <a href="{% url 'login' %}">Войдите</a>.</p>
+
+    <script>
+        // Добавим обработчик для проверки логина
+        document.getElementById('id_username').addEventListener('input', function() {
+            const username = this.value;
+            const errorDiv = document.getElementById('username-error');
+
+            if (username.length > 2) {  // проверка, что имя имеет минимум 3 символа
+                fetch(`/check_username/?username=${username}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.is_taken) {
+                            errorDiv.style.display = 'block';
+                        } else {
+                            errorDiv.style.display = 'none';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Ошибка:', error);
+                    });
+            } else {
+                errorDiv.style.display = 'none'; // если поле пустое или слишком короткое
+            }
+        });
+    </script>
 {% endblock %}

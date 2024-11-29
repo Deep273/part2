@@ -335,3 +335,67 @@ h2 {
     margin-top: 20px;
     border-radius: 8px;
 }
+ h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #fff;
+    }
+
+    .requests-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .requests-table th, .requests-table td {
+      padding: 12px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+
+    .requests-table th {
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+    }
+
+    .requests-table td {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .requests-table tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .requests-table tr:hover {
+      background-color: #ddd;
+    }
+
+    .requests-table a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+
+    .requests-table a:hover {
+      text-decoration: underline;
+    }
+
+.request-item.important {
+    border: 2px solid red;
+    background-color: #2с2с2с;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+/* Визуальная метка для важных заявок */
+.important-badge {
+    color: red;
+    font-weight: bold;
+    background-color: yellow;
+    padding: 0 5px;
+    border-radius: 3px;
+    font-size: 0.9em;
+    margin-left: 10px;
+}
